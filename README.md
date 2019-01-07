@@ -18,7 +18,7 @@ func main() {
 func gorun(wk goctx.Worker) {
 	for {
 		select {
-		case <-wk.Ctx.Done():
+		case <-wk.RecvCancel():
 			return
 		default:
 		}
