@@ -50,11 +50,11 @@ func (self *Owner) Done() {
 }
 
 func (self *Owner) Cancel() {
+	self.mux.Lock()
+	defer self.mux.Unlock()
 	if self.canceled {
 		return
 	}
-	self.mux.Lock()
-	defer self.mux.Unlock()
 
 	self.canceled = true
 	self.cancel()
@@ -73,11 +73,11 @@ func (self *Worker) Done() {
 }
 
 func (self *Worker) Cancel() {
+	self.mux.Lock()
+	defer self.mux.Unlock()
 	if *self.canceled {
 		return
 	}
-	self.mux.Lock()
-	defer self.mux.Unlock()
 
 	*self.canceled = true
 	self.cancel()
