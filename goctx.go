@@ -33,6 +33,13 @@ func (self *Owner)NewWorker() Worker {
 					wg:&self.wg, canceled:&self.canceled}
 }
 
+func (self *Worker)NewWorker() Worker {
+	ctx, _ := context.WithCancel(self.ctx)
+	self.wg.Add(1)
+	return Worker{ctx:ctx, cancel:self.cancel, mux:self.mux,
+					wg:self.wg, canceled:self.canceled}
+}
+
 func (self *Owner) Wait() {
 	self.wg.Wait()
 }
