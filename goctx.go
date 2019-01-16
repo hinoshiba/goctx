@@ -91,5 +91,7 @@ func (self *Worker) Cancel() {
 }
 
 func (self *Worker) RecvCancel() <-chan struct{} {
+	self.mux.Lock()
+	defer self.mux.Unlock()
 	return self.ctx.Done()
 }
