@@ -53,7 +53,8 @@ func (self *Owner) Unlock() {
 }
 
 func (self *Owner) Done() {
-	self.wg.Done()
+	//self.wg.Done()
+	return
 }
 
 func (self *Owner) Cancel() {
